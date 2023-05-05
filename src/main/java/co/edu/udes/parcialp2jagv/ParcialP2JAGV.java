@@ -85,18 +85,7 @@ public class ParcialP2JAGV {
                 }
                     
                 case 4 -> {
-                    System.out.println("Ingrese la matricula del nuevo coche de la empresa.");
-                    String matricula = scan.nextLine();
-                    
-                    System.out.println("Ingrese el modelo del nuevo coche de la empresa.");
-                    String modelo = scan.nextLine();
-                    
-                    System.out.println("Ingrese la marca del nuevo coche de la empresa.");
-                    String marca = scan.nextLine();
-                    
-                    auto = new CocheEmpresa(matricula, modelo, marca);
-                    
-                    carList.add(auto);
+                    crearAuto(carList, scan);
                 }
                     
                 case 5 -> {
@@ -143,7 +132,7 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el apellido del nuevo secretario de la empresa.");
                             lastname = scan.nextLine();
 
-                            System.out.println("Ingrese el DNi del nuevo secretario de la empresa.");
+                            System.out.println("Ingrese el DNI del nuevo secretario de la empresa.");
                             dni = scan.nextLine();
                             
                             System.out.println("Ingrese la direccion del nuevo secretario de la empresa.");
@@ -166,11 +155,14 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese donde queda la oficina del nuevo secretario de la empresa.");
                             offiece = scan.nextLine();
                             
-                            secretary = new Secretario(offiece, faxNumber, name, lastname, dni, adress, phone, salary, antiquity, employ);
+                            secretary = new Secretario(offiece, faxNumber, name, lastname, dni, adress, phone, salary, antiquity);
                             secretaryList.add(secretary);
+                            employList.add(secretary);
                         }
 
                         case 2 -> {
+                            System.out.println("SECRETARIOS DE LA EMPRESA\n");
+                            
                             for(Secretario secretario: secretaryList){
                                 System.out.println(secretario.toString());
                                 System.out.println("-----------");
@@ -178,6 +170,7 @@ public class ParcialP2JAGV {
                         }
                         
                         case 3 -> {
+                            System.out.println("SECRETARIOS DE LA EMPRESA\n");
                             
                             for(Secretario secretario: secretaryList){
                                 System.out.println(secretario.toString());
@@ -187,6 +180,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del secretario al que desea cambiarle el supervisor.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("EMPLEADOS DE LA EMPRESA\n");
                             
                             for(Empleado empleado: employList){
                                 
@@ -251,19 +246,31 @@ public class ParcialP2JAGV {
                             porcentajeComisiones = scan.nextDouble();
                             scan.nextLine();
                             
-                            auto = carList.get(sellerList.size()+bossesList.size());
+                            if (carList.isEmpty()) {
+                                System.out.println("No existen autos actualmente en la empresa, asi que se procedera a crear uno.");
+                                auto = crearAuto(carList, scan);
+                            }
+                            else{
+                                System.out.println("Se selecciono el primer coche de empresa agregado.");
+                                auto = carList.get(0);
+                            }
+                                
                             
-                            seller = new Vendedor(auto, cellphone, areaVenta, porcentajeComisiones, name, lastname, dni, adress, phone, salary, antiquity, employ);
+                            seller = new Vendedor(auto, cellphone, areaVenta, porcentajeComisiones, name, lastname, dni, adress, phone, salary, antiquity);
                             sellerList.add(seller);
+                            employList.add(seller);
                         }
 
                         case 2 -> {
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
+                            
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
                             }
                         }
                         
                         case 3 -> {
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
                             
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
@@ -278,6 +285,7 @@ public class ParcialP2JAGV {
                         }
                         
                         case 4 -> {
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
                             
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
@@ -289,6 +297,8 @@ public class ParcialP2JAGV {
                             scan.nextLine();
                             
                             ArrayList<Cliente> listaClientesVendedor = sellerList.get(index).getClientes();
+                            
+                            System.out.println("CLIENTES DEL VENDEDOR SELECCIONADO\n");
                             
                             for(Cliente client: listaClientesVendedor){
                                 System.out.println(client.toString());
@@ -302,6 +312,7 @@ public class ParcialP2JAGV {
                         }
                         
                         case 5 -> {
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
                             
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
@@ -311,6 +322,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del vendedor al que desea cambiarle el coche.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("COCHES DE LA EMPRESA\n");
                             
                             for(CocheEmpresa cars: carList){
                                 System.out.println(cars.toString());
@@ -329,6 +342,8 @@ public class ParcialP2JAGV {
                         
                         case 6 ->{
                             
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
+                            
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
                                 System.out.println("-----------");
@@ -337,6 +352,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del vendedor al que desea cambiarle el supervisor.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("EMPLEADOS DE LA EMPRESA\n");
                             
                             for(Empleado empleado: employList){
                                 
@@ -394,20 +411,41 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese donde queda la oficina del nuevo jefe de zona de la empresa.");
                             offiece = scan.nextLine();
                             
-                            secretary = secretaryList.get(bossesList.size());
-                            auto = carList.get(sellerList.size()+bossesList.size());
+                            if (secretaryList.isEmpty()) {
+                                System.out.println("Agregue un secretario antes de agregar un jefe de zona.");
+                                break;
+                            }
+                            else{
+                                System.out.println("Se selecciono el primer secretario agregado a la lista por defecto.");
+                                secretary = secretaryList.get(0);
+                            }
                             
-                            boss = new JefeDeZona(secretary, auto, offiece, name, lastname, dni, adress, phone, salary, antiquity, employ);
+                            
+                            if (carList.isEmpty()) {
+                                System.out.println("No existen autos actualmente en la empresa, asi que se procedera a crear uno.");
+                                auto = crearAuto(carList, scan);
+                            }
+                            else{
+                                System.out.println("Se selecciono el primer coche de empresa agregado.");
+                                auto = carList.get(0);
+                            }
+                            
+                            boss = new JefeDeZona(secretary, auto, offiece, name, lastname, dni, adress, phone, salary, antiquity);
                             bossesList.add(boss);
+                            employList.add(boss);
                         }
 
                         case 2 -> {
+                            System.out.println("JEFES DE ZONA\n");
+                            
                             for(JefeDeZona jefe: bossesList){
                                 System.out.println(jefe.toString());
+                                System.out.println("-----------");
                             }
                         }    
                             
                         case 3 -> {
+                            System.out.println("JEFES DE ZONA\n");
                             
                             for(JefeDeZona jefe: bossesList){
                                 System.out.println(jefe.toString());
@@ -417,6 +455,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del jefe de zona al que desea agregarle el vendedor.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("VENDEDORES DE LA EMPRESA\n");
                             
                             for(Vendedor vendedor: sellerList){
                                 System.out.println(vendedor.toString());
@@ -433,6 +473,7 @@ public class ParcialP2JAGV {
                         }
                         
                         case 4 -> {
+                            System.out.println("JEFES DE ZONA\n");
                             
                             for(JefeDeZona jefe: bossesList){
                                 System.out.println(jefe.toString());
@@ -444,6 +485,8 @@ public class ParcialP2JAGV {
                             scan.nextLine();
                             
                             ArrayList<Vendedor> vendedoresJefe = bossesList.get(index).getVendedores();
+                            
+                            System.out.println("VENDEDORES DEL JEFE SELECCIONADO\n");
                             
                             for(Vendedor sellers: vendedoresJefe){
                                 System.out.println(sellers.toString());
@@ -459,6 +502,8 @@ public class ParcialP2JAGV {
                         
                         case 5 -> {
                             
+                            System.out.println("JEFES DE ZONA\n");
+                            
                             for(JefeDeZona jefes: bossesList){
                                 System.out.println(jefes.toString());
                                 System.out.println("-----------");
@@ -467,6 +512,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del jefe de zona al que desea cambiarle el coche.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("COCHES DE EMPRESA\n");
                             
                             for(CocheEmpresa cars: carList){
                                 System.out.println(cars.toString());
@@ -484,6 +531,7 @@ public class ParcialP2JAGV {
                         }
                         
                         case 6 ->{
+                            System.out.println("JEFES DE ZONA\n");
                             
                             for(JefeDeZona jefe: bossesList){
                                 System.out.println(jefe.toString());
@@ -493,6 +541,8 @@ public class ParcialP2JAGV {
                             System.out.println("Ingrese el indice del jefe de zona al que desea cambiarle el supervisor.");
                             int index = scan.nextInt();
                             scan.nextLine();
+                            
+                            System.out.println("EMPLEADOS DE LA EMPRESA\n");
                             
                             for(Empleado empleado: employList){
                                 
@@ -538,5 +588,22 @@ public class ParcialP2JAGV {
         Cliente client = new Cliente(name, lastName, dni, adress);
         
         return client;
+    }
+
+    public static CocheEmpresa crearAuto(ArrayList<CocheEmpresa> carList, Scanner scan){
+        System.out.println("Ingrese la matricula del nuevo coche de la empresa.");
+        String matricula = scan.nextLine();
+        
+        System.out.println("Ingrese el modelo del nuevo coche de la empresa.");
+        String modelo = scan.nextLine();
+        
+        System.out.println("Ingrese la marca del nuevo coche de la empresa.");
+        String marca = scan.nextLine();
+        
+        CocheEmpresa auto = new CocheEmpresa(matricula, modelo, marca);
+        
+        carList.add(auto);
+        
+        return auto;
     }
 }

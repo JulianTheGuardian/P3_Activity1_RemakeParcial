@@ -15,13 +15,14 @@ public class JefeDeZona extends Empleado {
     private Secretario secretary;
     private CocheEmpresa car;
     private String offiece;
-    private ArrayList vendedores = new ArrayList();
+    private ArrayList vendedores;
 
-    public JefeDeZona(Secretario secretary, CocheEmpresa car, String offiece, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity, Empleado employ) {
-        super(name, lastname, dni, adress, phone, salary, antiquity, employ, 0.2);
+    public JefeDeZona(Secretario secretary, CocheEmpresa car, String offiece, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity) {
+        super(name, lastname, dni, adress, phone, salary, antiquity, 0.2);
         this.secretary = secretary;
         this.car = car;
         this.offiece = offiece;
+        this.vendedores = new ArrayList();
     }
 
     public JefeDeZona() {
@@ -49,6 +50,17 @@ public class JefeDeZona extends Empleado {
     
     @Override
     public String toString() {
-        return super.toString() + "Jefe de zona";
+        
+        String retorno = super.toString() + "Vendedor" + "\n Vendedores: ";;
+        
+        if (vendedores.isEmpty()) {
+            retorno += "Aun no tiene vendedores.";
+        }
+        else{
+            for (int i = 0; i < vendedores.size(); i++) {
+                retorno += "\n \t " + vendedores.get(i).toString();
+            }
+        }
+        return retorno;
     }
 }

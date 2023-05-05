@@ -23,7 +23,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(String name, String lastname, String dni, String adress, String phone, double salary, int antiquity, Empleado supervisor, double percentage) {
+    public Empleado(String name, String lastname, String dni, String adress, String phone, double salary, int antiquity, double percentage) {
         this.name = name;
         this.lastname = lastname;
         this.dni = dni;
@@ -32,7 +32,7 @@ public class Empleado {
         this.salary = salary;
         this.porcentaje = percentage;
         this.antiquity = antiquity;
-        this.supervisor = supervisor;
+        this.supervisor = null;
         
         for (int i = 0; i < this.antiquity; i++) {
             increaseSalary();
@@ -41,7 +41,15 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return " Nombre = " + name + "/n Apellido = " + lastname + "/n DNI = " + dni + "/n Direccion = " + adress + "/n  Numero de telefono = " + phone + "/n Salario = " + salary + "/n Antiguedad = " + antiquity + "/n Puesto en la empresa = ";
+        
+        String retorno;
+        if (supervisor != null) {
+            retorno = " Nombre = " + name + "\n Apellido = " + lastname + "\n DNI = " + dni + "\n Direccion = " + adress + "\n Numero de telefono = " + phone + "\n Salario = " + salary + "\n Antiguedad = " + antiquity + "\n Supervisor = " + supervisor.getName() + " " + supervisor.getLastname() +"\n Puesto en la empresa = ";
+        }
+        else{
+            retorno = " Nombre = " + name + "\n Apellido = " + lastname + "\n DNI = " + dni + "\n Direccion = " + adress + "\n Numero de telefono = " + phone + "\n Salario = " + salary + "\n Antiguedad = " + antiquity + "\n Supervisor = Pendiente de asignar" + "\n Puesto en la empresa = ";
+        }
+        return retorno;
     }
     
     public void changeSupervisor(Empleado supervisor){
@@ -51,5 +59,14 @@ public class Empleado {
     public void increaseSalary(){
         this.salary = this.salary + this.salary*this.porcentaje;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+    
     
 }

@@ -19,12 +19,13 @@ public class Vendedor extends Empleado{
     private ArrayList clientes;
     
 
-    public Vendedor(CocheEmpresa car, String cellphone, String areaVenta, double porcentajeComisiones, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity, Empleado employ) {
-        super(name, lastname, dni, adress, phone, salary, antiquity, employ, 0.1);
+    public Vendedor(CocheEmpresa car, String cellphone, String areaVenta, double porcentajeComisiones, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity) {
+        super(name, lastname, dni, adress, phone, salary, antiquity, 0.1);
         this.car = car;
         this.cellphone = cellphone;
         this.areaVenta = areaVenta;
         this.porcentajeComisiones = porcentajeComisiones;
+        this.clientes = new ArrayList();
     }
 
     public Vendedor() {
@@ -44,7 +45,19 @@ public class Vendedor extends Empleado{
     
     @Override
     public String toString() {
-        return super.toString() + "Vendedor";
+        
+        String retorno = super.toString() + "Vendedor" + "\n Clientes: ";;
+        
+        if (clientes.isEmpty()) {
+            retorno += "Aun no tiene clientes.";
+        }
+        else{
+            for (int i = 0; i < clientes.size(); i++) {
+                retorno += "\n \t \t" + clientes.get(i).toString();
+            }
+        }
+        
+        return retorno;
     }
 
     public ArrayList getClientes() {

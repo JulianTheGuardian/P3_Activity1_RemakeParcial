@@ -13,8 +13,8 @@ public class Secretario extends Empleado{
     private String offiece;
     private String faxNumber;
 
-    public Secretario(String offiece, String faxNumber, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity, Empleado employ) {
-        super(name, lastname, dni, adress, phone, salary, antiquity, employ, 0.05);
+    public Secretario(String offiece, String faxNumber, String name, String lastname, String dni, String adress, String phone, double salary, int antiquity) {
+        super(name, lastname, dni, adress, phone, salary, antiquity, 0.05);
         this.offiece = offiece;
         this.faxNumber = faxNumber;
     }
